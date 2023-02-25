@@ -1,30 +1,28 @@
-import React, {useState} from "react";
-import {Button} from 'reactstrap'
+import React, { useState } from "react";
 
 function Searchbar(props) {
-
-
-    const [term, setTerm] = useState('');
+    console.log(props);
+    const [term, setTerm] = useState("");
 
     const keyDownEventHandler = (e) => {
         if (e.key === "Enter") search();
-    }
+    };
 
     const search = () => {
-        props.onSearch(term)
-    }
+        props.onSearch(term);
+    };
+
 
     return (
         <div className="d-flex">
             <input
-                onChange={e => setTerm(e.target.value)}
+                onChange={(e) => setTerm(e.target.value)}
                 onKeyDown={keyDownEventHandler}
-                className="form-control"
+                className="form-control m-2"
                 type="text"
-                placeholder="Szukaj...."/>
-            <button
-                onClick={search}
-                className={"btn btn-primary"}>
+                placeholder="Szukaj...."
+            />
+            <button onClick={search} className={`m-2 btn btn-${props.theme}`}>
                 Szukaj
             </button>
         </div>
@@ -32,4 +30,3 @@ function Searchbar(props) {
 }
 
 export default Searchbar;
-
