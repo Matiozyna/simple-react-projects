@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ThemeContext from "../../../context/themeContext";
 
 function Searchbar(props) {
     console.log(props);
@@ -12,7 +13,6 @@ function Searchbar(props) {
         props.onSearch(term);
     };
 
-
     return (
         <div className="d-flex">
             <input
@@ -22,9 +22,13 @@ function Searchbar(props) {
                 type="text"
                 placeholder="Szukaj...."
             />
-            <button onClick={search} className={`m-2 btn btn-${props.theme}`}>
-                Szukaj
-            </button>
+            <ThemeContext.Consumer>
+                {(value) => (
+                    <button onClick={search} className={`m-2 btn btn-${value}`}>
+                        Szukaj
+                    </button>
+                )}
+            </ThemeContext.Consumer>
         </div>
     );
 }

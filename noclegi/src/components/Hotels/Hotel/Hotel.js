@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Hotel.module.css";
 import hotelImg from "../../../assets/images/hotel.jpg";
 import PropTypes from "prop-types";
+import ThemeContext from "../../../context/themeContext";
 
 const propTypes = {
     name: PropTypes.string.isRequired,
@@ -48,12 +49,16 @@ function Hotel(props) {
                         <p className={styles.desctiption}>
                             {props.description}
                         </p>
-                        <a
-                            href="#"
-                            className={`btn btn-${props.theme} float-end px-5`}
-                        >
-                            Pokaż
-                        </a>
+                        <ThemeContext.Consumer>
+                            {(value) => (
+                                <a
+                                    href="#"
+                                    className={`btn btn-${value} float-end px-5`}
+                                >
+                                    Pokaż
+                                </a>
+                            )}
+                        </ThemeContext.Consumer>
                     </div>
                 </div>
             </div>

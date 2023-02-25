@@ -3,12 +3,15 @@ import Menu from "./components/Menu/Menu";
 import Hotels from "./components/Hotels/Hotels";
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 import Searchbar from "./components/UI/Searchbar/Searchbar";
-import { Component } from "react";
+import React, { Component } from "react";
 import Layout from "./components/Layout/Layout";
 import Footer from "./components/Footer/Footer";
 import ThemeButton from "./components/UI/ThemeButton/ThemeButton";
+import ThemeContext from "./context/themeContext";
 
 class App extends Component {
+    static contextType = ThemeContext;
+
     hotels = [
         {
             id: 1,
@@ -61,33 +64,36 @@ class App extends Component {
     };
 
     render() {
-        return (
-            <div className="App">
-                <Layout
-                    header={
-                        <Header>
-                            <Searchbar
-                                onSearch={(term) => this.searchHandler(term)}
-                                theme={this.state.theme}
-                                changeTheme={this.themeHandler}
-                            />
-                            <ThemeButton changeTheme={this.themeHandler} />;
-                        </Header>
-                    }
-                    menu={<Menu />}
-                    content={
-                        this.state.loading ? (
-                            <LoadingIcon />
-                        ) : (
-                            <Hotels
-                                hotels={this.state.hotels}
-                                theme={this.state.theme}
-                            />
-                        )
-                    }
-                    footer={<Footer />}
+        const header = (
+            <Header>
+                <Searchbar
+                    onSearch={(term) => this.searchHandler(term)}
+                    changeTheme={this.themeHandler}
                 />
-            </div>
+                <ThemeButton changeTheme={this.themeHandler} />;
+            </Header>
+        );
+        const menu = <Menu />;
+
+        const content = this.state.loading ? (
+            <LoadingIcon />
+        ) : (
+            <Hotels hotels={this.state.hotels} />
+        );
+
+        const footer = <Footer />;
+
+        return (
+            <ThemeContext.Provider value={this.state.theme}>
+                <div className="App">
+                    <Layout
+                        header={header}
+                        menu={menu}
+                        content={content}
+                        footer={footer}
+                    />
+                </div>
+            </ThemeContext.Provider>
         );
     }
 }
