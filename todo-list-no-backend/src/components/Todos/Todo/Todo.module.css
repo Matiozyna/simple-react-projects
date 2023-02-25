@@ -1,0 +1,51 @@
+.todoContainer{
+    width: 80vw;
+    height: 15rem;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 8px 8px 24px 0 rgba(66, 68, 90, 1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
+    margin-top: 5rem;
+}
+
+p{
+    text-align: center;
+    width: 50%;
+}
+
+.buttons{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.done p{
+    color: rgba(0, 0,0, 0.5);
+    text-decoration: line-through;
+}
+
+.done{
+
+}
+
+.deleteButton, .finishButton{
+    height: 5rem;
+    width: 15rem;
+    outline: none;
+    font-size: 2rem;
+    border-radius: 20px;
+}
+
+.finishButton{
+    border: 3px solid green;
+    background-color: yellowgreen;
+}
+
+.deleteButton{
+    border: 3px solid darkred;
+    background-color: red;
+}
